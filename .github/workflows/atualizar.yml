@@ -1,9 +1,7 @@
 name: Atualizar Ofertas Diárias
 
 on:
-  schedule:
-    - cron: '0 6 * * *' # Roda todo dia às 6h da manhã
-  workflow_dispatch: # Cria um botão para você rodar manualmente quando quiser
+  workflow_dispatch: # Botão para rodar apenas quando você mandar
 
 jobs:
   atualizar-dados:
@@ -29,5 +27,5 @@ jobs:
           git config --global user.name "Bot de Ofertas"
           git config --global user.email "bot@seusite.com"
           git add ofertas-hoje.json
-          git commit -m "Atualizando produtos automaticamente" || exit 0
+          git commit -m "Atualizando produtos manualmente" || exit 0
           git push
