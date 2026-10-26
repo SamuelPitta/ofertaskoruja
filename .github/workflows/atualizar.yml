@@ -1,0 +1,33 @@
+name: Atualizar Ofertas Diárias
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Roda todo dia às 6h da manhã
+  workflow_dispatch: # Cria um botão para você rodar manualmente quando quiser
+
+jobs:
+  atualizar-dados:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Rodar o motor de ofertas
+        env:
+          LOMADEE_API_KEY: ${{ secrets.LOMADEE_API_KEY }}
+          LOMADEE_SOURCE_ID: ${{ secrets.LOMADEE_SOURCE_ID }}
+        run: node atualizar-ofertas.js
+
+      - name: Salvar produtos no site
+        run: |
+          git config --global user.name "Bot de Ofertas"
+          git config --global user.email "bot@seusite.com"
+          git add ofertas-hoje.json
+          git commit -m "Atualizando produtos automaticamente" || exit 0
+          git push
