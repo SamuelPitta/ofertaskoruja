@@ -1,7 +1,8 @@
 const fs = require('fs');
 
 async function buscarOfertasLomadee() {
-    const appToken = process.env.LOMADEE_APP_TOKEN; 
+    // Aqui está a correção: usamos a API_KEY para as duas portas
+    const appToken = process.env.LOMADEE_API_KEY; 
     const sourceId = process.env.LOMADEE_SOURCE_ID;
     const apiKey = process.env.LOMADEE_API_KEY; 
     
