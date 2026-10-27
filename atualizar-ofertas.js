@@ -1,12 +1,13 @@
+
 const fs = require('fs');
 
 async function buscarOfertasLomadee() {
-    // Aqui está a correção: usamos a API_KEY para as duas portas
     const appToken = process.env.LOMADEE_API_KEY; 
     const sourceId = process.env.LOMADEE_SOURCE_ID;
     const apiKey = process.env.LOMADEE_API_KEY; 
     
-    const url = `https://api.lomadee.com/v3/${appToken}/offer/_all?sourceId=${sourceId}&size=50`;
+    // Olha o .br aqui embaixo na URL!
+    const url = `https://api.lomadee.com.br/v3/${appToken}/offer/_all?sourceId=${sourceId}&size=50`;
 
     try {
         const resposta = await fetch(url, {
